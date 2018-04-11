@@ -1,15 +1,16 @@
 package ar.edu.itba.ss.approximations;
 
 public abstract class Oscillation {
-    private double dt;
-    private static final double M = 70;
-    private static final double GAMMA = 100;
-    private static final double K = 10000;
-    private static final double TF = 5;
+    protected double dt;
+    protected static final double M = 70;
+    protected static final double GAMMA = 100;
+    protected static final double K = 10000;
+    protected double lastR=1;
+    protected double lastR1=-GAMMA/(2*M);
 
     public Oscillation(double dt) {
         this.dt = dt;
     }
 
-    public abstract double getNextValue(double t);
+    public abstract double getNextValue();
 }
