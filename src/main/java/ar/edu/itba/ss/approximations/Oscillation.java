@@ -7,6 +7,7 @@ public abstract class Oscillation {
     protected static final double K = 10000;
     protected double lastR=1;
     protected double lastR1=-GAMMA/(2*M);
+    protected boolean first = true;
 
     public Oscillation(double dt) {
         this.dt = dt;

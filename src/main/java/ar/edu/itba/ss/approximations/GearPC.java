@@ -23,6 +23,10 @@ public class GearPC extends Oscillation {
     }
 
     public double getNextValue() {
+        if (first) {
+            first = false;
+            return lastR;
+        }
 
         //Predict Values (Slide 24)
         double r5p = lastR5;

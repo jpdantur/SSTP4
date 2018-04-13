@@ -1,5 +1,5 @@
 %Analitical solution
-dt = 0.001; %Try different values
+dt = 0.0001; %Try different values
 m = 70;
 k = 10000;
 gama = 100;
