@@ -9,7 +9,6 @@
 *.iws
 *.xyz
 *.avi
-*.txt
 
 # Mac
 .DS_Store
