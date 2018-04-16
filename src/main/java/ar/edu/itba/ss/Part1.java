@@ -14,7 +14,7 @@ import java.util.List;
  * Hello world!
  *
  */
-public class App 
+public class Part1
 {
     public static void main( String[] args ) throws Exception
     {
