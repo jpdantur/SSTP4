@@ -33,7 +33,7 @@ public class Particle {
 
     public void interact(Particle other) {
         BigDecimal force = G.multiply(mass).multiply(other.mass).
-                divide(BigDecimal.valueOf(Vector2D.distance(position,other.position)));//TODO: no hay q dividir la distancia al cuadrado?
+                divide(BigDecimal.valueOf(FastMath.pow(Vector2D.distance(position,other.position),2)));
 
         double xFactor = (position.getX()-other.position.getX())/Vector2D.distance(position,other.position);
         double yFactor = (position.getY()-other.position.getY())/Vector2D.distance(position,other.position);
