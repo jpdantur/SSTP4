@@ -51,7 +51,7 @@ public class PlanetPositionReader {
         double y = Double.valueOf(values[3]);
         double vx = Double.valueOf(values[4]);
         double vy = Double.valueOf(values[5]);
-        BigDecimal mass = new BigDecimal(Double.valueOf(values[6]));
+        BigDecimal mass = new BigDecimal(values[6]);
         Particle particle = new Particle(new Vector2D(x,y), new Vector2D(vx,vy), mass);
 
         addData(planet,month,particle);

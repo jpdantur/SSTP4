@@ -45,4 +45,8 @@ public class Particle {
     }
 
 
+    @Override
+    public String toString() {
+        return position + " " + velocity + " " + acceleration + " " + mass;
+    }
 }
