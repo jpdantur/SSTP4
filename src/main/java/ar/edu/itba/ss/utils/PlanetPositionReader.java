@@ -20,17 +20,19 @@ public class PlanetPositionReader {
     private Map<Planet,Map<Integer, Particle>> data = new HashMap<>();
 
     public PlanetPositionReader() {
-
+        Stream<String> lines = null;
         try{
             Path path = Paths.get(getClass().getClassLoader()
                     .getResource("spacial_coordinates.txt").toURI());
 
             StringBuilder data = new StringBuilder();
-            Stream<String> lines = Files.lines(path);
+            lines = Files.lines(path);
             lines.forEach(line -> parseLine(line));
-            lines.close();
         }catch (Exception e){
             throw new RuntimeException("Se ha producido un error leyendo el archivo. "+e);
+        } finally {
+            if (lines != null)
+                lines.close();
         }
 
 
