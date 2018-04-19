@@ -47,10 +47,10 @@ public class PlanetPositionReader {
 
         Planet planet = Planet.valueOf(values[1]);
         int month = Integer.parseInt(values[0]);
-        double x = Double.valueOf(values[2]);
-        double y = Double.valueOf(values[3]);
-        double vx = Double.valueOf(values[4]);
-        double vy = Double.valueOf(values[5]);
+        double x = Double.parseDouble(values[2]);
+        double y = Double.parseDouble(values[3]);
+        double vx = Double.parseDouble(values[4]);
+        double vy = Double.parseDouble(values[5]);
         BigDecimal mass = new BigDecimal(values[6]);
         Particle particle = new Particle(new Vector2D(x,y), new Vector2D(vx,vy), mass);
 
