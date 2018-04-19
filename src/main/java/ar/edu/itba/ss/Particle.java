@@ -47,6 +47,6 @@ public class Particle {
 
     @Override
     public String toString() {
-        return position + " " + velocity + " " + acceleration + " " + mass;
+        return position.getX() + " " +position.getY()+" "+ velocity.getX()+" " +velocity.getY()+ " " + mass;
     }
 }

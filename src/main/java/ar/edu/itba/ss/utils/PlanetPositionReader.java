@@ -69,8 +69,4 @@ public class PlanetPositionReader {
         return data.get(planet).get(month);
     }
 
-    public static void main(String [] args){
-        PlanetPositionReader pp = new PlanetPositionReader();
-        pp.getPlanetByMonth(Planet.Earth, 8);
-    }
 }
