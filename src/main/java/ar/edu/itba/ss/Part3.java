@@ -38,13 +38,15 @@ public class Part3 {
 
 
 
-            i++;
+
             if (i%10000==0) {
                 Files.write(Paths.get("res.xyz"),(planets.size()+"\n").getBytes(),StandardOpenOption.APPEND);
                 Files.write(Paths.get("res.xyz"),(j+"\n").getBytes(),StandardOpenOption.APPEND);
                 printParticles();
+                System.out.println(j+" - "+t);
                 j++;
             }
+            i++;
             updatePlanetsPosition(dt);
             updatePlanetsForce();
             updatePlanetsVelocity(dt);
@@ -93,7 +95,7 @@ public class Part3 {
     private static Vector2D getShipVelocity() {
         double angle = Vector2D.angle(new Vector2D(0,-1),planets.get(Planet.Earth).getPosition());
         Vector2D ret = new Vector2D(FastMath.cos(angle),FastMath.sin(angle)).scalarMultiply(11);
-        System.out.println(ret.getY());
+        //System.out.println(ret.getY());
         return ret;
     }
 

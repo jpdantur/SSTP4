@@ -27,8 +27,8 @@ public class Particle {
         double strength = (G*mass*other.mass)/
                 Vector2D.distanceSq(position,other.position);
 
-        double xFactor = (other.position.getX()-position.getX())/Vector2D.distance(position,other.position);
-        double yFactor = (other.position.getY()-position.getY())/Vector2D.distance(position,other.position);
+        double xFactor = (other.position.getX()-position.getX())/position.subtract(other.position).getNorm();
+        double yFactor = (other.position.getY()-position.getY())/position.subtract(other.position).getNorm();
         force = force.add(strength,new Vector2D(xFactor,yFactor));
     }
 
