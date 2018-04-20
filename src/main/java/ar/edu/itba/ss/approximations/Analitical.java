@@ -22,7 +22,7 @@ public class Analitical extends Oscillation{
     public double getNextValue() {
         double A = 1;//TODO que es A????
         double powBase = (K/M) - FastMath.pow(GAMMA,2)/(4*FastMath.pow(M,2));
-        curX = A* FastMath.exp(-1*(GAMMA/2*M)*curT)
+        curX = A* FastMath.exp(-1*(GAMMA/(2*M))*curT)
                 *FastMath.cos(FastMath.pow(powBase,0.5)*curT);
         curT += dt;
         return curX;

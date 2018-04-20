@@ -1,9 +1,6 @@
 package ar.edu.itba.ss.graphics.exercise1;
 
-import ar.edu.itba.ss.approximations.BeemanPC;
-import ar.edu.itba.ss.approximations.GearPC;
-import ar.edu.itba.ss.approximations.LeapFrog;
-import ar.edu.itba.ss.approximations.Oscillation;
+import ar.edu.itba.ss.approximations.*;
 import ar.edu.itba.ss.utils.Util;
 import org.omg.CORBA.PRIVATE_MEMBER;
 
@@ -20,12 +17,13 @@ public class MethodsComparison {
 
     public static void main(String[] args){
 
-        double dt = 0.001;
+        double dt = 0.01;
 
         List<? extends Oscillation> oscillations = Arrays.asList(
                 new LeapFrog(dt),
                 new BeemanPC(dt),
-                new GearPC(dt)
+                new GearPC(dt),
+                new Analitical(dt)
         );
 
         List<String> values =
