@@ -5,6 +5,9 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
 
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -13,21 +16,35 @@ public class Part3 {
     private static Map<Planet,Particle> planets = new EnumMap<>(Planet.class);
 
 
-    public static void main (String[] args) {
+    public static void main (String[] args)throws Exception {
         Scanner sc = new Scanner(System.in);
+        System.out.println("Dame dt: ");
         double dt = sc.nextDouble();
-        double total = 100.0;
+        double total = 1000000000;
         int month=8;
         PlanetPositionReader pp = new PlanetPositionReader();
         planets.put(Planet.Earth,pp.getPlanetByMonth(Planet.Earth, month));
         planets.put(Planet.Sun,pp.getPlanetByMonth(Planet.Sun, month));
         planets.put(Planet.Jupiter,pp.getPlanetByMonth(Planet.Jupiter, month));
-        planets.put(Planet.Ship, new Particle(getShipLocation(), getShipVelocity(),new BigDecimal("721")));
-        double t=0.0;
 
+        planets.put(Planet.Saturn,pp.getPlanetByMonth(Planet.Saturn, month));
+        planets.put(Planet.Ship, new Particle(getShipLocation(), getShipVelocity(),721));
+        double t=0.0;
+        int i = 0;
+        Files.write(Paths.get("res.xyz"),"".getBytes());
         setPlanetsForce();
+        int j=0;
         while (t<total) { //TODO: Poner condicion de corte
 
+
+
+            i++;
+            if (i%10000==0) {
+                Files.write(Paths.get("res.xyz"),(planets.size()+"\n").getBytes(),StandardOpenOption.APPEND);
+                Files.write(Paths.get("res.xyz"),(j+"\n").getBytes(),StandardOpenOption.APPEND);
+                printParticles();
+                j++;
+            }
             updatePlanetsPosition(dt);
             updatePlanetsForce();
             updatePlanetsVelocity(dt);
@@ -36,14 +53,18 @@ public class Part3 {
 
     }
 
-    private static void updatePlanetsForce() {
-        for (Map.Entry<Planet,Particle> e1:planets.entrySet()) {
-            for (Map.Entry<Planet,Particle> e2:planets.entrySet()) {
-                if (!e1.getKey().equals(e2.getKey())){
-                    e1.getValue().updateForce(e2.getValue());
-                }
-            }
+    private static void printParticles() throws Exception {
+        for (Map.Entry<Planet,Particle> e:planets.entrySet()){
+
+            Files.write(Paths.get("res.xyz"),(e.getValue()+"\n").getBytes(),StandardOpenOption.APPEND);
         }
+    }
+
+    private static void updatePlanetsForce() {
+        for (Map.Entry<Planet,Particle> e:planets.entrySet()) {
+            e.getValue().updateForce();
+        }
+        setPlanetsForce();
     }
 
     private static void updatePlanetsVelocity(double dt) {
@@ -71,7 +92,9 @@ public class Part3 {
 
     private static Vector2D getShipVelocity() {
         double angle = Vector2D.angle(new Vector2D(0,-1),planets.get(Planet.Earth).getPosition());
-        return new Vector2D(FastMath.cos(angle),FastMath.sin(angle)).scalarMultiply(11);
+        Vector2D ret = new Vector2D(FastMath.cos(angle),FastMath.sin(angle)).scalarMultiply(11);
+        System.out.println(ret.getY());
+        return ret;
     }
 
     private static Vector2D getShipLocation() {
