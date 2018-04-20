@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oscilador Puntual Amortiguado</title>
+</head>
+<body>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="container" style="height: 800px; margin: auto; min-width: 510px; max-width: 800px"></div>
+
+<script>
+
+    Highcharts.chart('container', {
+        chart: {
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'Error cuadratico medio'
+        },
+
+        yAxis: {
+            title: {
+                text: 'ECM'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                }
+            }
+        },
+        xAxis: {
+            categories: [
+                0.001, 0.005, 0.01, 0.02, 0.025, 0.03, 0.05
+            ]
+        },
+        yAxis: {
+            type: 'logarithmic',
+            minorTickInterval: 0.1
+        },
+        series: [{
+            name: 'LeapFrog',
+            data: [
+                1.2904269379597503E-6, 3.2529889898683E-5, 1.3332072731606374E-4, 5.841655681273221E-4, 9.777117603993195E-4, 0.0015150572475271192, 0.006034296905628464
+            ]
+        }, {
+            name: 'BeemanPC',
+            data: [
+                9.941711596232428E-6, 2.39961862357947E-4, 9.196340445963467E-4, 0.003386535177338331, 0.005108772466709048, 0.0070643163489438835, 0.016715830131147576
+            ]
+        }, {
+            name: 'GearPC',
+            data: [
+                1.0027697064466465E-5, 2.5037035068736085E-4, 9.99522697325067E-4, 0.003969989755808771, 0.006195904817767118, 0.008835590870088653, 0.023059395450339783
+            ]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+
+</script>
+</body>
+</html>
