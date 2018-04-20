@@ -19,6 +19,9 @@ public class PlanetPositionReader {
 
     private Map<Planet,Map<Integer, Particle>> data = new HashMap<>();
 
+    private static final double AU = 149_597_870.700; //km
+    private static final double DAY = 86_400.0; //s
+
     public PlanetPositionReader() {
         Stream<String> lines = null;
         try{
@@ -47,10 +50,10 @@ public class PlanetPositionReader {
 
         Planet planet = Planet.valueOf(values[1]);
         int month = Integer.parseInt(values[0]);
-        double x = Double.parseDouble(values[2]);
-        double y = Double.parseDouble(values[3]);
-        double vx = Double.parseDouble(values[4]);
-        double vy = Double.parseDouble(values[5]);
+        double x = Double.parseDouble(values[2])*AU;
+        double y = Double.parseDouble(values[3])*AU;
+        double vx = Double.parseDouble(values[4])*AU/DAY;
+        double vy = Double.parseDouble(values[5])*AU/DAY;
         BigDecimal mass = new BigDecimal(values[6]);
         Particle particle = new Particle(new Vector2D(x,y), new Vector2D(vx,vy), mass);
 
