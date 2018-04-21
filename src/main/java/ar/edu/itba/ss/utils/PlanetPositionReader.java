@@ -19,7 +19,7 @@ public class PlanetPositionReader {
 
     private Map<Planet,Map<Integer, Particle>> data = new HashMap<>();
 
-    private static final double AU = 149_597_870.700; //km
+    private static final double AU = 149_597_870_700.0; //m
     private static final double DAY = 86_400.0; //s
 
     public PlanetPositionReader() {

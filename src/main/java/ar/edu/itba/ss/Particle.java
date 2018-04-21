@@ -10,7 +10,7 @@ public class Particle {
     private Vector2D force;
     private Vector2D lastForce;
     private double mass;
-    private static final double G = 0.00000000006693;
+    private static final double G = 6.693e-11;
 
     public Particle(Vector2D position, Vector2D velocity, double mass) {
         this.position = position;
@@ -21,6 +21,9 @@ public class Particle {
 
     Vector2D getPosition() {
         return position;
+    }
+    Vector2D getVelocity() {
+        return velocity;
     }
 
     void interact(Particle other) {

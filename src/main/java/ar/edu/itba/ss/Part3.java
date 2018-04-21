@@ -4,7 +4,7 @@ import ar.edu.itba.ss.utils.PlanetPositionReader;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
 
-import java.math.BigDecimal;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -20,7 +20,7 @@ public class Part3 {
         Scanner sc = new Scanner(System.in);
         System.out.println("Dame dt: ");
         double dt = sc.nextDouble();
-        double total = 1000000000;
+        double total = 100000000;
         int month=8;
         PlanetPositionReader pp = new PlanetPositionReader();
         planets.put(Planet.Earth,pp.getPlanetByMonth(Planet.Earth, month));
@@ -30,7 +30,7 @@ public class Part3 {
         planets.put(Planet.Saturn,pp.getPlanetByMonth(Planet.Saturn, month));
         planets.put(Planet.Ship, new Particle(getShipLocation(), getShipVelocity(),721));
         double t=0.0;
-        int i = 0;
+        //int i = 0;
         Files.write(Paths.get("res.xyz"),"".getBytes());
         setPlanetsForce();
         int j=0;
@@ -39,14 +39,14 @@ public class Part3 {
 
 
 
-            if (i%10000==0) {
+            //if (i%10000==0) {
                 Files.write(Paths.get("res.xyz"),(planets.size()+"\n").getBytes(),StandardOpenOption.APPEND);
                 Files.write(Paths.get("res.xyz"),(j+"\n").getBytes(),StandardOpenOption.APPEND);
                 printParticles();
-                System.out.println(j+" - "+t);
+                System.out.println(t);
                 j++;
-            }
-            i++;
+            //}
+            //i++;
             updatePlanetsPosition(dt);
             updatePlanetsForce();
             updatePlanetsVelocity(dt);
@@ -93,15 +93,15 @@ public class Part3 {
     }
 
     private static Vector2D getShipVelocity() {
-        double angle = Vector2D.angle(new Vector2D(0,-1),planets.get(Planet.Earth).getPosition());
-        Vector2D ret = new Vector2D(FastMath.cos(angle),FastMath.sin(angle)).scalarMultiply(11);
+
+        double norm = planets.get(Planet.Earth).getVelocity().getNorm();
+        return planets.get(Planet.Earth).getVelocity().add(11_000.0/norm,planets.get(Planet.Earth).getVelocity());
         //System.out.println(ret.getY());
-        return ret;
     }
 
     private static Vector2D getShipLocation() {
-        double angle = Vector2D.angle(new Vector2D(1,0),planets.get(Planet.Earth).getPosition());
-        return planets.get(Planet.Earth).getPosition().add(1500,new Vector2D(FastMath.cos(angle),FastMath.sin(angle)));
+        double norm = planets.get(Planet.Earth).getPosition().getNorm();
+        return planets.get(Planet.Earth).getPosition().add(1_500_000.0/norm,planets.get(Planet.Earth).getPosition());
     }
 
 
