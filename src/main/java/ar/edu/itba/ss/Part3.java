@@ -34,8 +34,14 @@ public class Part3 {
         Files.write(Paths.get("res.xyz"), "".getBytes());
         setPlanetsForce();
         long j = 0;
-        while (t < 1e10) { //TODO: Poner condicion de corte
 
+        //parametros de condicion de corte 1
+        double limit = 1e12;
+        Planet observer = Planet.Ship;
+        Planet target = Planet.Saturn;
+        Double minDistance = null;
+
+        while (t < limit) { //condicion de corte 1: corte programado
 
             if (i % dt2 == 0) {
                 Files.write(Paths.get("res.xyz"), (planets.size() + "\n").getBytes(), StandardOpenOption.APPEND);
@@ -49,8 +55,23 @@ public class Part3 {
             updatePlanetsForce();
             updatePlanetsVelocity(dt);
             t += dt;
+
+            if(minDistance==null){
+                minDistance = getDistanceToTarget(observer,target);
+            }else {
+                double tempPosition = getDistanceToTarget(observer,target);
+                if(tempPosition < minDistance){
+                    minDistance = tempPosition;
+                }
+            }
         }
 
+        System.out.print("distancia minima con condicion de corte 1: "+minDistance);
+
+    }
+
+    private static Double getDistanceToTarget(Planet observer, Planet target) {
+        return planets.get(observer).getPosition().distance(planets.get(target).getPosition());
     }
 
     private static void printParticles() throws Exception {
