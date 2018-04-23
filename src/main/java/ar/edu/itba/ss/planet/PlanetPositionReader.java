@@ -1,10 +1,9 @@
-package ar.edu.itba.ss.utils;
+package ar.edu.itba.ss.planet;
 
-import ar.edu.itba.ss.Particle;
-import ar.edu.itba.ss.Planet;
+import ar.edu.itba.ss.planet.Particle;
+import ar.edu.itba.ss.planet.Planet;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,8 +18,8 @@ public class PlanetPositionReader {
 
     private Map<Planet,Map<Integer, Particle>> data = new HashMap<>();
 
-    private static final double AU = 149_597_870_700.0; //m
-    private static final double DAY = 86_400.0; //s
+    public static final double AU = 149_597_870_700.0; //m
+    public static final double DAY = 86_400.0; //s
 
     public PlanetPositionReader() {
         Stream<String> lines = null;

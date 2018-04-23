@@ -1,6 +1,5 @@
-package ar.edu.itba.ss;
+package ar.edu.itba.ss.planet;
 
-import ar.edu.itba.ss.utils.PlanetPositionReader;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 
@@ -11,7 +10,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Part3 {
+public class Part3Old {
     private static Map<Planet, Particle> planets = new EnumMap<>(Planet.class);
 
 

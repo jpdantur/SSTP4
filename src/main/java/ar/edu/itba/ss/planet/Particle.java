@@ -1,4 +1,4 @@
-package ar.edu.itba.ss;
+package ar.edu.itba.ss.planet;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.math3.util.FastMath;
@@ -57,5 +57,9 @@ public class Particle {
         double newVx = velocity.getX() + (dt/(2*mass))*(lastForce.getX()+force.getX());
         double newVy = velocity.getY() + (dt/(2*mass))*(lastForce.getY()+force.getY());
         velocity = new Vector2D(newVx,newVy);
+    }
+
+    public double getMass() {
+        return mass;
     }
 }
