@@ -21,6 +21,7 @@ public class PlanetsSimulation {
     private long dt2;
     private int month;
     private Planet target;
+    private Planet secondTarget;
     private final Planet observer = Planet.Ship;
     private StopCondition stopCondition;
 
@@ -31,12 +32,13 @@ public class PlanetsSimulation {
         this.month = month;
         this.target = target;
         this.stopCondition = stopCondition;
+        secondTarget = Planet.Earth;
         planetsInitializer();
         stopConditionInitializer();
     }
 
     private void stopConditionInitializer() {
-        stopCondition.setBasicValues(observer, target, planets);
+        stopCondition.setBasicValues(observer, target, secondTarget, planets);
     }
 
     private void planetsInitializer(){
@@ -53,7 +55,8 @@ public class PlanetsSimulation {
     private Vector2D getShipVelocity() {
         double earthSpeed = planets.get(Planet.Earth).getVelocity().getNorm();
         Vector2D normalSpeed = planets.get(Planet.Earth).getPosition().normalize();
-        return new Vector2D(11_000 + earthSpeed, new Vector2D(normalSpeed.getY(), -normalSpeed.getX()));
+        //return new Vector2D(11_000 + earthSpeed, new Vector2D(normalSpeed.getY(), -normalSpeed.getX()));
+        return new Vector2D(11_000 , new Vector2D(normalSpeed.getY(), -normalSpeed.getX()));
     }
 
     private Vector2D getShipLocation() {
@@ -61,34 +64,36 @@ public class PlanetsSimulation {
                 .add(1_500_000.0, planets.get(Planet.Earth).getPosition().normalize());
     }
 
-    public void simulate() throws Exception{
-        double t = 0.0;
-        long i = 0;
-        Files.write(Paths.get("res.xyz"), "".getBytes());
-        setPlanetsForce();
-        long j = 0;
+    public void simulate() {
+        try{
+            double t = 0.0;
+            long i = 0;
+            Files.write(Paths.get("res.xyz"), "".getBytes());
+            setPlanetsForce();
+            long j = 0;
 
-        while(stopCondition.canContinue(t)){
-            if (i % dt2 == 0) {
-                Files.write(Paths.get("res.xyz"), (planets.size()+2 + "\n").getBytes(), StandardOpenOption.APPEND);
-                Files.write(Paths.get("res.xyz"), (j + "\n").getBytes(), StandardOpenOption.APPEND);
-                Files.write(Paths.get("res.xyz"), ("10 10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
-                Files.write(Paths.get("res.xyz"), ("-10 -10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
-                printParticlesInAu();
-                //System.out.println(t);
-                System.out.println("min distance = " + stopCondition.getMinDistance());
-                j++;
+            while(stopCondition.canContinue(t)){
+                if (i % dt2 == 0) {
+                    Files.write(Paths.get("res.xyz"), (planets.size()+2 + "\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get("res.xyz"), (j + "\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get("res.xyz"), ("10 10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get("res.xyz"), ("-10 -10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
+                    printParticlesInAu();
+                    //System.out.println(t);
+                    System.out.println(String.format("min distance = %f - current distance = %f",
+                            stopCondition.getMinDistance(),
+                            stopCondition.getCurrentDistance()));
+                    j++;
+                }
+                i++;
+                updatePlanetsPosition(dt);
+                updatePlanetsForce();
+                updatePlanetsVelocity(dt);
+                t += dt;
             }
-            i++;
-            updatePlanetsPosition(dt);
-            updatePlanetsForce();
-            updatePlanetsVelocity(dt);
-            t += dt;
+        }catch (Exception e){
+            throw  new RuntimeException(e);
         }
-    }
-
-    public double getMinDistance(){
-        return stopCondition.getMinDistance();
     }
 
     private void setPlanetsForce() {
@@ -145,5 +150,21 @@ public class PlanetsSimulation {
 
     public double getLastYear() {
         return 1977 + stopCondition.getLastTime()/(60*60*24*365.4);
+    }
+
+    public double getMinDistanceYear() {
+        return 1977 + stopCondition.getTimeForMinDistance()/(60*60*24*365.4);
+    }
+
+    public Double getMinDistanceYearForTwoTargets() {
+        return 1977 + stopCondition.getTimeForMinDistanceForTwoTargets()/(60*60*24*365.4);
+    }
+
+    public double getMinDistance(){
+        return stopCondition.getMinDistance();
+    }
+
+    public Double getMinDistanceForTwoTargets() {
+        return stopCondition.getMinDistanceForTwoTargets();
     }
 }

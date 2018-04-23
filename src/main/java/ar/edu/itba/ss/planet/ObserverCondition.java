@@ -3,22 +3,28 @@ package ar.edu.itba.ss.planet;
 /**
  * Created by scamisay on 22/04/18.
  */
-public class Observer extends StopCondition{
+public class ObserverCondition extends StopCondition{
 
     private int visitLimits;
     private int currentVisits = 0;
     private double obsevationLimit;
     private boolean inObservation = false;
+    private double maxDistanceAllowed;
 
-    public Observer(int visitLimits, double obsevationLimit) {
+    public ObserverCondition(int visitLimits, double obsevationLimit, double maxDistanceProportion) {
         this.visitLimits = visitLimits;
         this.obsevationLimit = obsevationLimit;
+        maxDistanceAllowed = obsevationLimit*maxDistanceProportion;
     }
 
     @Override
     boolean canContinue(double currentTime) {
         lastTime = currentTime;
-        evaluateMinDistance();
+        evaluateMinDistance(currentTime);
+
+        if(getDistanceToTarget() >= maxDistanceAllowed){
+            return false;
+        }
 
         if(isTargetObservable() && !inObservation){
             inObservation = true;
