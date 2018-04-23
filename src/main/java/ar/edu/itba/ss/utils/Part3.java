@@ -16,8 +16,8 @@ public class Part3 {
 
     public static void main(String[] args){
 
-        double dt = 3600;
-        long dt2 = 24;
+        double dt = 36;
+        long dt2 = 10000;
         //int month = 1;
         Planet target = Planet.Saturn;
         //StopCondition stopCondition = new ProgrammedTimeCondition(1e9);
