@@ -32,6 +32,7 @@ public class Part3 {
 
         List<SimulationResult> results = new ArrayList<>();
         for(int month = 1 ; month <= 12 ; month++){
+            System.out.println("Mes: " + month);
             PlanetsSimulation simulation = new PlanetsSimulation(dt, dt2, month, target, stopCondition);
             simulation.simulate();
             results.add(new SimulationResult(simulation, month));
@@ -56,6 +57,18 @@ public class Part3 {
         private Double minDistanceYearForTwoTargets;
         private Double minDistanceForTwoTargets;
         private Integer month;
+
+        @Override
+        public String toString() {
+            return "SimulationResult{" +
+                    "lastYear=" + lastYear +
+                    ", minDistanceYear=" + minDistanceYear +
+                    ", minDistance=" + minDistance +
+                    ", minDistanceYearForTwoTargets=" + minDistanceYearForTwoTargets +
+                    ", minDistanceForTwoTargets=" + minDistanceForTwoTargets +
+                    ", month=" + month +
+                    '}';
+        }
 
         public SimulationResult(PlanetsSimulation simulation, int month) {
             lastYear = simulation.getLastYear();
