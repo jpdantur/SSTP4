@@ -17,4 +17,9 @@ public class ProgrammedTimeCondition extends StopCondition {
         evaluateMinDistance(currentTime);
         return currentTime < timeLimit;
     }
+
+    @Override
+    void start() {
+
+    }
 }

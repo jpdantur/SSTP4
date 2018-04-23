@@ -72,6 +72,7 @@ public class PlanetsSimulation {
             setPlanetsForce();
             long j = 0;
 
+            stopCondition.start();
             while(stopCondition.canContinue(t)){
                 if (i % dt2 == 0) {
                     Files.write(Paths.get("res_"+month+".xyz"), (planets.size()+2 + "\n").getBytes(), StandardOpenOption.APPEND);

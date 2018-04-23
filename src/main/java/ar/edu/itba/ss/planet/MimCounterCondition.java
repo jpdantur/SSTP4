@@ -11,7 +11,7 @@ public class MimCounterCondition extends StopCondition {
 
     public MimCounterCondition(int limitCounter) {
         this.limitCounter = limitCounter;
-        currentCount = 0;
+        start();
     }
 
     @Override
@@ -20,10 +20,15 @@ public class MimCounterCondition extends StopCondition {
             tempMinDistance=getDistanceToTarget();
         }
         evaluateMinDistance(currentTime);
-        if(minDistance <= tempMinDistance){
+        if(minDistance < tempMinDistance){
             tempMinDistance = minDistance;
             currentCount++;
         }
-        return currentTime <= limitCounter;
+        return currentCount <= limitCounter;
+    }
+
+    @Override
+    void start() {
+        currentCount = 0;
     }
 }

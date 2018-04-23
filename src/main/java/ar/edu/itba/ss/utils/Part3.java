@@ -28,7 +28,8 @@ public class Part3 {
         System.out.println("min distance = " + simulation.getMinDistance());
         System.out.println("last year = " + simulation.getLastYear());*/
 
-        StopCondition stopCondition = new ObserverCondition(1 ,3e11,7);
+        //StopCondition stopCondition = new ObserverCondition(1 ,3e11,7);
+        StopCondition stopCondition = new MimCounterCondition(2);
 
         List<SimulationResult> results = new ArrayList<>();
         for(int month = 1 ; month <= 12 ; month++){
@@ -45,7 +46,7 @@ public class Part3 {
         String tableSorted =
                 results.stream()
                         .sorted((r1,r2)-> r1.getMinDistanceForTwoTargets().compareTo(r2.getMinDistanceForTwoTargets()))
-                        .map( r -> String.format("%d | %f | %f", r.getMonth(), r.getMinDistanceForTwoTargets(), r.getMinDistanceYearForTwoTargets()))
+                        .map( r -> String.format("%d | %6.3e | %f", r.getMonth(), r.getMinDistanceForTwoTargets(), r.getMinDistanceYearForTwoTargets()))
                         .collect(Collectors.joining("\n"));
         System.out.println("info = " + bestResult);
     }

@@ -26,6 +26,8 @@ public abstract class StopCondition {
 
     abstract boolean canContinue(double currentTime);
 
+    abstract void start();
+
     protected Double getDistanceToTarget() {
         return planets.get(observer).getPosition().distance(planets.get(target).getPosition());
     }
