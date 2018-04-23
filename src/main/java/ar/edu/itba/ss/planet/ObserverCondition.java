@@ -38,11 +38,6 @@ public class ObserverCondition extends StopCondition{
         return true;
     }
 
-    @Override
-    void start() {
-
-    }
-
     private boolean isTargetObservable() {
         return getDistanceToTarget() <= obsevationLimit;
     }

@@ -28,7 +28,8 @@ public class MimCounterCondition extends StopCondition {
     }
 
     @Override
-    void start() {
+    public void start() {
+        super.start();
         currentCount = 0;
     }
 }

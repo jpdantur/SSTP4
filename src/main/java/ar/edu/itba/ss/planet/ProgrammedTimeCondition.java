@@ -18,8 +18,4 @@ public class ProgrammedTimeCondition extends StopCondition {
         return currentTime < timeLimit;
     }
 
-    @Override
-    void start() {
-
-    }
 }

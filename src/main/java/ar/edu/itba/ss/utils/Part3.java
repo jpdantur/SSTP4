@@ -29,7 +29,8 @@ public class Part3 {
         System.out.println("last year = " + simulation.getLastYear());*/
 
         //StopCondition stopCondition = new ObserverCondition(1 ,3e11,7);
-        StopCondition stopCondition = new MimCounterCondition(2);
+        //StopCondition stopCondition = new MimCounterCondition(8);
+        StopCondition stopCondition = new ProgrammedTimeCondition(60*60*24*365*20);
 
         List<SimulationResult> results = new ArrayList<>();
         for(int month = 1 ; month <= 12 ; month++){

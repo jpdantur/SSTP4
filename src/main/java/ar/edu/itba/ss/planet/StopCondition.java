@@ -11,11 +11,11 @@ public abstract class StopCondition {
     protected Planet target;
     protected Map<Planet, Particle> planets;
     protected Double minDistance;
-    protected double timeForMinDistance;
-    protected double lastTime;
+    protected Double timeForMinDistance;
+    protected Double lastTime;
     protected Planet secondTarget;
     protected Double minDistanceForTwoTargets;
-    protected double timeForMinDistanceForTwoTargets;
+    protected Double timeForMinDistanceForTwoTargets;
 
     public void setBasicValues(Planet observer, Planet target, Planet secondTarget, Map<Planet, Particle> planets) {
         this.observer = observer;
@@ -26,7 +26,12 @@ public abstract class StopCondition {
 
     abstract boolean canContinue(double currentTime);
 
-    abstract void start();
+    public void start(){
+        minDistance = null;
+        timeForMinDistance = null;
+        minDistanceForTwoTargets = null;
+        timeForMinDistanceForTwoTargets = null;
+    }
 
     protected Double getDistanceToTarget() {
         return planets.get(observer).getPosition().distance(planets.get(target).getPosition());
