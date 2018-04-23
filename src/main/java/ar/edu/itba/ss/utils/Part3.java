@@ -17,10 +17,10 @@ public class Part3 {
     public static void main(String[] args){
 
         double dt = 36;
-        long dt2 = 10000;
+        long dt2 = 40000;
         //int month = 1;
         Planet target = Planet.Saturn;
-        //StopCondition stopCondition = new ProgrammedTimeCondition(1e9);
+        StopCondition stopCondition = new ProgrammedTimeCondition(1e9);
        /* StopCondition stopCondition = new ObserverCondition(1 ,3.2e11,4);
 
         PlanetsSimulation simulation = new PlanetsSimulation(dt, dt2, month, target, stopCondition);
@@ -28,7 +28,7 @@ public class Part3 {
         System.out.println("min distance = " + simulation.getMinDistance());
         System.out.println("last year = " + simulation.getLastYear());*/
 
-        StopCondition stopCondition = new ObserverCondition(1 ,3e11,100);
+        //StopCondition stopCondition = new ObserverCondition(1 ,3e11,100);
 
         List<SimulationResult> results = new ArrayList<>();
         for(int month = 1 ; month <= 12 ; month++){

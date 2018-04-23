@@ -68,16 +68,16 @@ public class PlanetsSimulation {
         try{
             double t = 0.0;
             long i = 0;
-            Files.write(Paths.get("res.xyz"), "".getBytes());
+            Files.write(Paths.get("res_"+month+".xyz"), "".getBytes());
             setPlanetsForce();
             long j = 0;
 
             while(stopCondition.canContinue(t)){
                 if (i % dt2 == 0) {
-                    Files.write(Paths.get("res.xyz"), (planets.size()+2 + "\n").getBytes(), StandardOpenOption.APPEND);
-                    Files.write(Paths.get("res.xyz"), (j + "\n").getBytes(), StandardOpenOption.APPEND);
-                    Files.write(Paths.get("res.xyz"), ("10 10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
-                    Files.write(Paths.get("res.xyz"), ("-10 -10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get("res_"+month+".xyz"), (planets.size()+2 + "\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get("res_"+month+".xyz"), (j + "\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get("res_"+month+".xyz"), ("10 10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get("res_"+month+".xyz"), ("-10 -10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
                     printParticlesInAu();
                     //System.out.println(t);
                     System.out.println(String.format("min distance = %f - current distance = %f",
