@@ -114,7 +114,7 @@ public class PlanetsSimulation {
 
     private void printParticlesInAu() throws Exception {
         for (Map.Entry<Planet, Particle> e : planets.entrySet()) {
-            Files.write(Paths.get("res.xyz"), (printParticleInAu(e.getValue(),e.getKey()) + "\n").getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get("res_"+month+".xyz"), (printParticleInAu(e.getValue(),e.getKey()) + "\n").getBytes(), StandardOpenOption.APPEND);
         }
     }
 
