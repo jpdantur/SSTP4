@@ -80,7 +80,8 @@ public class PlanetsSimulation {
                     Files.write(Paths.get("res.xyz"), ("-10 -10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
                     printParticlesInAu();
                     //System.out.println(t);
-                    System.out.println(String.format("min distance = %f - current distance = %f",
+                    System.out.println(String.format("month = %d - min distance = %6.3e - current distance = %6.3e",
+                            month,
                             stopCondition.getMinDistance(),
                             stopCondition.getCurrentDistance()));
                     j++;
@@ -94,6 +95,7 @@ public class PlanetsSimulation {
         }catch (Exception e){
             throw  new RuntimeException(e);
         }
+        System.out.println("month = " + month);
     }
 
     private void setPlanetsForce() {
@@ -166,5 +168,23 @@ public class PlanetsSimulation {
 
     public Double getMinDistanceForTwoTargets() {
         return stopCondition.getMinDistanceForTwoTargets();
+    }
+
+    class DoublePair{
+        private double x;
+        private double y;
+
+        public DoublePair(double x, double y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public double getX() {
+            return x;
+        }
+
+        public double getY() {
+            return y;
+        }
     }
 }
