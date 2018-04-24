@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 public class ECMComparison {
 
     public static void main(String[] args){
-        List<Double> dtList = Arrays.asList(0.0001, 0.0005, 0.001, 0.005, 0.01, 0.02, 0.025, 0.03, 0.05);
+        List<Double> dtList = Arrays.asList(0.00001,0.00005,0.0001, 0.0005, 0.001, 0.005, 0.01, 0.02, 0.025, 0.03, 0.05);
         List<Function<Double, Oscillation>> methods = Arrays.asList(LeapFrog::new, BeemanPC::new, GearPC::new);
 
         String dtValues = dtList.stream().map(x -> x.toString()).collect(joining(", "));
