@@ -49,6 +49,11 @@ public class Part3 {
                         .sorted((r1,r2)-> r1.getMinDistanceForTwoTargets().compareTo(r2.getMinDistanceForTwoTargets()))
                         .map( r -> String.format("%d | %6.3e | %f", r.getMonth(), r.getMinDistanceForTwoTargets(), r.getMinDistanceYearForTwoTargets()))
                         .collect(Collectors.joining("\n"));
+
+        String tableSortedOnlySaturn = results.stream()
+                .sorted((r1,r2)-> r1.getMinDistance().compareTo(r2.getMinDistance()))
+                .map( r -> String.format("%d | %6.3e | %f", r.getMonth(), r.getMinDistance(), r.getMinDistanceYear()))
+                .collect(Collectors.joining("\n"));
         System.out.println("info = " + bestResult);
     }
 
