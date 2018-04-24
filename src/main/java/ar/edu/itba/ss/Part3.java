@@ -16,7 +16,7 @@ public class Part3 {
 
     public static void main(String[] args){
 
-        double dt = 36;
+        double dt = 0.01;
         long dt2 = 10000;
         //int month = 1;
         Planet target = Planet.Saturn;

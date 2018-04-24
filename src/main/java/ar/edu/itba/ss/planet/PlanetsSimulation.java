@@ -65,7 +65,7 @@ public class PlanetsSimulation {
     private Vector2D getShipVelocity() {
         double earthSpeed = planets.get(Planet.Earth).getVelocity().getNorm();
         Vector2D normalSpeed = planets.get(Planet.Earth).getVelocity().normalize();
-        return rotate(new Vector2D(14_000 + earthSpeed, new Vector2D(normalSpeed.getX(), normalSpeed.getY())),1);
+        return rotate(new Vector2D(14_000 + earthSpeed, new Vector2D(normalSpeed.getX(), normalSpeed.getY())),0);
         //return new Vector2D(11_000 , new Vector2D(normalSpeed.getY(), -normalSpeed.getX()));
     }
 
