@@ -1,6 +1,7 @@
 package ar.edu.itba.ss.planet;
 
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import org.apache.commons.math3.util.FastMath;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -63,8 +64,8 @@ public class PlanetsSimulation {
 
     private Vector2D getShipVelocity() {
         double earthSpeed = planets.get(Planet.Earth).getVelocity().getNorm();
-        Vector2D normalSpeed = planets.get(Planet.Earth).getPosition().normalize();
-        return new Vector2D(11_000 + earthSpeed, new Vector2D(normalSpeed.getY(), -normalSpeed.getX()));
+        Vector2D normalSpeed = planets.get(Planet.Earth).getVelocity().normalize();
+        return rotate(new Vector2D(14_000 + earthSpeed, new Vector2D(normalSpeed.getX(), normalSpeed.getY())),0.1);
         //return new Vector2D(11_000 , new Vector2D(normalSpeed.getY(), -normalSpeed.getX()));
     }
 
@@ -192,6 +193,13 @@ public class PlanetsSimulation {
 
     public List<DoublePair> getVelocityModuloForShip() {
         return velocityModuloForShip;
+    }
+
+    private Vector2D rotate(Vector2D v ,double n)
+    {
+        double rx = (v.getX() * FastMath.cos(n)) - (v.getY() * FastMath.sin(n));
+        double ry = (v.getX() * FastMath.sin(n)) + (v.getY() * FastMath.cos(n));
+        return new Vector2D(rx,ry);
     }
 
     public class DoublePair{
