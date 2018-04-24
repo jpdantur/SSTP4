@@ -5,7 +5,9 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import static ar.edu.itba.ss.planet.PlanetPositionReader.AU;
@@ -25,6 +27,9 @@ public class PlanetsSimulation {
     private final Planet observer = Planet.Ship;
     private StopCondition stopCondition;
 
+    private boolean calculateVelocityModuloForShip;
+    private List<DoublePair> velocityModuloForShip = new ArrayList<>();
+
 
     public PlanetsSimulation(double dt, long dt2, int month, Planet target, StopCondition stopCondition) {
         this.dt = dt;
@@ -35,6 +40,10 @@ public class PlanetsSimulation {
         secondTarget = Planet.Earth;
         planetsInitializer();
         stopConditionInitializer();
+    }
+
+    public void calculateVelocityModuloForShip(){
+        calculateVelocityModuloForShip = true;
     }
 
     private void stopConditionInitializer() {
@@ -81,11 +90,16 @@ public class PlanetsSimulation {
                     Files.write(Paths.get("res_"+month+".xyz"), ("-10 -10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
                     printParticlesInAu();
                     //System.out.println(t);
-                    System.out.println(String.format("month = %d - min distance = %6.3e - current distance = %6.3e",
+                    System.out.println(String.format("month = %d - min distance = %6.3e - current distance = %6.3e - time = %6.3e",
                             month,
                             stopCondition.getMinDistance(),
-                            stopCondition.getCurrentDistance()));
+                            stopCondition.getCurrentDistance(),
+                            t));
                     j++;
+
+                    if(calculateVelocityModuloForShip){
+                        calculateVelocityModuloForShipForThisMoment(t);
+                    }
                 }
                 i++;
                 updatePlanetsPosition(dt);
@@ -97,6 +111,11 @@ public class PlanetsSimulation {
             throw  new RuntimeException(e);
         }
         System.out.println("month = " + month);
+    }
+
+    private void calculateVelocityModuloForShipForThisMoment(double t) {
+        double modulo = planets.get(observer).getVelocity().getNorm();
+        velocityModuloForShip.add(new DoublePair(t,modulo));
     }
 
     private void setPlanetsForce() {
@@ -171,7 +190,11 @@ public class PlanetsSimulation {
         return stopCondition.getMinDistanceForTwoTargets();
     }
 
-    class DoublePair{
+    public List<DoublePair> getVelocityModuloForShip() {
+        return velocityModuloForShip;
+    }
+
+    public class DoublePair{
         private double x;
         private double y;
 
@@ -188,4 +211,5 @@ public class PlanetsSimulation {
             return y;
         }
     }
+
 }

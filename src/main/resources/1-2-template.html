@@ -21,11 +21,6 @@
             text: 'Error cuadratico medio'
         },
 
-        yAxis: {
-            title: {
-                text: 'ECM'
-            }
-        },
         legend: {
             layout: 'vertical',
             align: 'right',
@@ -40,13 +35,37 @@
             }
         },
         xAxis: {
+            title: {
+                enabled: true,
+                text: 'dt',
+                style: {
+                    fontSize:'25px'
+                }
+            },
+            labels: {
+                format: '{value}',
+                style: {
+                    fontSize:'20px'
+                }
+            },
             categories: [
                 0.001, 0.005, 0.01, 0.02, 0.025, 0.03, 0.05
             ]
         },
         yAxis: {
             type: 'logarithmic',
-            minorTickInterval: 0.1
+            minorTickInterval: 0.1,
+            title: {
+                text: 'ECM',
+                style: {
+                    fontSize:'25px'
+                }
+            },
+            labels: {
+                style: {
+                    fontSize:'20px'
+                }
+            }
         },
         series: [{
             name: 'LeapFrog',

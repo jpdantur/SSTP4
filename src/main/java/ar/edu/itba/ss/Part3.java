@@ -1,4 +1,4 @@
-package ar.edu.itba.ss.utils;
+package ar.edu.itba.ss;
 
 import ar.edu.itba.ss.planet.*;
 

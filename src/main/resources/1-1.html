@@ -23,9 +23,35 @@
 
         yAxis: {
             title: {
-                text: 'Number of Employees'
+                text: 'r (m)',
+                style: {
+                    fontSize:'25px'
+                }
+            },
+            labels: {
+
+                style: {
+                    fontSize:'20px'
+                }
             }
         },
+            xAxis: {
+                min:0,
+                max:500,
+                title: {
+                    enabled: true,
+                    text: 'Tiempo (cs)',
+                    style: {
+                        fontSize:'25px'
+                    }
+                },
+                labels: {
+                    format: '{value}',
+                    style: {
+                        fontSize:'20px'
+                    }
+                }
+            },
         legend: {
             layout: 'vertical',
             align: 'right',

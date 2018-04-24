@@ -20,12 +20,6 @@
         title: {
             text: 'dt=0.05'
         },
-
-        yAxis: {
-            title: {
-                text: 'Number of Employees'
-            }
-        },
         legend: {
             layout: 'vertical',
             align: 'right',
@@ -36,6 +30,33 @@
             series: {
                 label: {
                     connectorAllowed: false
+                }
+            }
+        },yAxis: {
+            title: {
+                text: 'r (m)',
+                style: {
+                    fontSize:'25px'
+                }
+            },
+            labels: {
+
+                style: {
+                    fontSize:'20px'
+                }
+            }
+        },xAxis: {
+            title: {
+                enabled: true,
+                text: 'Tiempo (cs)',
+                style: {
+                    fontSize:'25px'
+                }
+            },
+            labels: {
+                format: '{value}',
+                style: {
+                    fontSize:'20px'
                 }
             }
         },
