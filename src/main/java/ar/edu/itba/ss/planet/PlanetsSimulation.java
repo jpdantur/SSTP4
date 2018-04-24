@@ -71,7 +71,7 @@ public class PlanetsSimulation {
 
     private Vector2D getShipLocation() {
         return planets.get(Planet.Earth).getPosition()
-                .add(1_500_000.0, planets.get(Planet.Earth).getPosition().normalize());
+                .add(1_500_000.0 + 6.3781e6, planets.get(Planet.Earth).getPosition().normalize());
     }
 
     public void simulate() {
@@ -87,8 +87,8 @@ public class PlanetsSimulation {
                 if (i % dt2 == 0) {
                     Files.write(Paths.get("res_"+month+".xyz"), (planets.size()+2 + "\n").getBytes(), StandardOpenOption.APPEND);
                     Files.write(Paths.get("res_"+month+".xyz"), (j + "\n").getBytes(), StandardOpenOption.APPEND);
-                    Files.write(Paths.get("res_"+month+".xyz"), ("10 10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
-                    Files.write(Paths.get("res_"+month+".xyz"), ("-10 -10 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get("res_"+month+".xyz"), ("10 10 0 0 0 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get("res_"+month+".xyz"), ("-10 -10 0 0 0 0 0 0\n").getBytes(), StandardOpenOption.APPEND);
                     printParticlesInAu();
                     //System.out.println(t);
                     System.out.println(String.format("month = %d - min distance = %6.3e - current distance = %6.3e - time = %6.3e",
@@ -142,11 +142,14 @@ public class PlanetsSimulation {
     }
 
     private String printParticleInAu(Particle particle, Planet planet){
-        return String.format("%f %f %f %f %f",
+        return String.format("%f %f %f %f %f %f %f %f",
                 particle.getPosition().getX()/AU,
                 particle.getPosition().getY()/AU,
                 particle.getVelocity().getX()/(AU/DAY),
                 particle.getVelocity().getY()/(AU/DAY),
+                particle.getForce().getX(),
+                particle.getForce().getY(),
+                particle.getMass(),
                 planet.getRadius()
 
         );

@@ -16,7 +16,7 @@ public class Part3 {
 
     public static void main(String[] args){
 
-        double dt = 0.01;
+        double dt = 36;
         long dt2 = 10000;
         //int month = 1;
         Planet target = Planet.Saturn;
@@ -30,10 +30,10 @@ public class Part3 {
 
         //StopCondition stopCondition = new ObserverCondition(1 ,3e11,7);
         //StopCondition stopCondition = new MimCounterCondition(8);
-        StopCondition stopCondition = new ProgrammedTimeCondition(60*60*24*365*5);
+        StopCondition stopCondition = new ProgrammedTimeCondition(60*60*24*365*10);
 
         List<SimulationResult> results = new ArrayList<>();
-        for(int month = 12 ; month <= 12 ; month++){
+        for(int month = 1 ; month <= 12 ; month++){
             System.out.println("Mes: " + month);
             PlanetsSimulation simulation = new PlanetsSimulation(dt, dt2, month, target, stopCondition);
             simulation.simulate();

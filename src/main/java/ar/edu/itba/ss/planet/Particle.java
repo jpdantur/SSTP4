@@ -19,6 +19,10 @@ public class Particle {
         this.force = new Vector2D(0,0);
     }
 
+    public Vector2D getForce() {
+        return force;
+    }
+
     Vector2D getPosition() {
         return position;
     }
