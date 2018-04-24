@@ -30,10 +30,10 @@ public class Part3 {
 
         //StopCondition stopCondition = new ObserverCondition(1 ,3e11,7);
         //StopCondition stopCondition = new MimCounterCondition(8);
-        StopCondition stopCondition = new ProgrammedTimeCondition(60*60*24*365*20);
+        StopCondition stopCondition = new ProgrammedTimeCondition(60*60*24*365*5);
 
         List<SimulationResult> results = new ArrayList<>();
-        for(int month = 10 ; month <= 10 ; month++){
+        for(int month = 12 ; month <= 12 ; month++){
             System.out.println("Mes: " + month);
             PlanetsSimulation simulation = new PlanetsSimulation(dt, dt2, month, target, stopCondition);
             simulation.simulate();
