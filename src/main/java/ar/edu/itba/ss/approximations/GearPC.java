@@ -13,10 +13,10 @@ public class GearPC extends Oscillation {
     private static final double ALPHA5 = 1.0 / 60;
 
     //Initial Values (Slide 29 --Modified for dampened oscillator, check Slide 35--)
-    private double lastR2 = -(K / M) * lastR - (GAMMA / M) * lastR1;
-    private double lastR3 = -(K / M) * lastR1 - (GAMMA / M) * lastR2;
-    private double lastR4 = -(K / M) * lastR2 - (GAMMA / M) * lastR3;
-    private double lastR5 = -(K / M) * lastR3 - (GAMMA / M) * lastR4;
+    private double lastR2 = -(K / M) * (lastR - (GAMMA / M) * lastR1);
+    private double lastR3 = -(K / M) * (lastR1 - (GAMMA / M) * lastR2);
+    private double lastR4 = -(K / M) * (lastR2 - (GAMMA / M) * lastR3);
+    private double lastR5 = -(K / M) * (lastR3 - (GAMMA / M) * lastR4);
 
     public GearPC(double dt) {
         super(dt);
