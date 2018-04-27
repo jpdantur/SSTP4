@@ -15,11 +15,11 @@ public class VelocityModuloForShip {
 
     public static void main(String[] args) {
         Planet target = Planet.Saturn;
-        StopCondition stopCondition = new ProgrammedTimeCondition(5e8);
+        StopCondition stopCondition = new ProgrammedTimeCondition(60*60*24*365*10);
         double dt = 36;
         long dt2 = 100000;
-        int month = 10;
-        PlanetsSimulation simulation = new PlanetsSimulation(dt, dt2, month, target, stopCondition);
+        int month = 11;
+        PlanetsSimulation simulation = new PlanetsSimulation(dt, dt2, month, target, stopCondition,-0.174533/2);
         simulation.calculateVelocityModuloForShip();
         simulation.simulate();
 

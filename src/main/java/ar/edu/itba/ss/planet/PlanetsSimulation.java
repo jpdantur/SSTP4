@@ -27,18 +27,20 @@ public class PlanetsSimulation {
     private Planet secondTarget;
     private final Planet observer = Planet.Ship;
     private StopCondition stopCondition;
+    private double shipRotationAngle = 0;
 
     private boolean calculateVelocityModuloForShip;
     private List<DoublePair> velocityModuloForShip = new ArrayList<>();
 
 
-    public PlanetsSimulation(double dt, long dt2, int month, Planet target, StopCondition stopCondition) {
+    public PlanetsSimulation(double dt, long dt2, int month, Planet target, StopCondition stopCondition, double shipRotationAngle) {
         this.dt = dt;
         this.dt2 = dt2;
         this.month = month;
         this.target = target;
         this.stopCondition = stopCondition;
         secondTarget = Planet.Earth;
+        this.shipRotationAngle = shipRotationAngle;
         planetsInitializer();
         stopConditionInitializer();
     }
@@ -65,7 +67,7 @@ public class PlanetsSimulation {
     private Vector2D getShipVelocity() {
         double earthSpeed = planets.get(Planet.Earth).getVelocity().getNorm();
         Vector2D normalSpeed = planets.get(Planet.Earth).getVelocity().normalize();
-        return rotate(new Vector2D(14_000 + earthSpeed, new Vector2D(normalSpeed.getX(), normalSpeed.getY())),0);
+        return rotate(new Vector2D(15_000 + earthSpeed, new Vector2D(normalSpeed.getX(), normalSpeed.getY())), shipRotationAngle);
         //return new Vector2D(11_000 , new Vector2D(normalSpeed.getY(), -normalSpeed.getX()));
     }
 

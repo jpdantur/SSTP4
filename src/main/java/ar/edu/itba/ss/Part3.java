@@ -35,7 +35,7 @@ public class Part3 {
         List<SimulationResult> results = new ArrayList<>();
         for(int month = 1 ; month <= 12 ; month++){
             System.out.println("Mes: " + month);
-            PlanetsSimulation simulation = new PlanetsSimulation(dt, dt2, month, target, stopCondition);
+            PlanetsSimulation simulation = new PlanetsSimulation(dt, dt2, month, target, stopCondition,-0.174533/2);
             simulation.simulate();
             results.add(new SimulationResult(simulation, month));
         }

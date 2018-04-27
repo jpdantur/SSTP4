@@ -37,13 +37,15 @@
         xAxis: {
             title: {
                 enabled: true,
-                text: 'dt',
+                text: 'dt (s)',
                 style: {
                     fontSize:'25px'
                 }
             },
             labels: {
-                format: '{value}',
+                formatter: function () {
+                    return this.value.toExponential(0); // 2 digits of precision
+                },
                 style: {
                     fontSize:'20px'
                 }
@@ -62,6 +64,9 @@
                 }
             },
             labels: {
+                formatter: function () {
+                    return this.value.toExponential(0); // 2 digits of precision
+                },
                 style: {
                     fontSize:'20px'
                 }
